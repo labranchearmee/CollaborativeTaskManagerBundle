@@ -1,0 +1,38 @@
+Brickstorm\CollaborativeTaskManagerBundle\Entity\UserTask:
+  type: entity
+  table: bsrm_user_task
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    rate:
+      type: integer
+      length: 30
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+  manyToOne:
+    task:
+      targetEntity: Task
+      cascade: {  }
+      joinColumns:
+        task_id:
+          referencedColumnName: id
+      orphanRemoval: false
+    user:
+      targetEntity: Application\Sonata\UserBundle\Entity\User
+      cascade: {  }
+      joinColumns:
+        user_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

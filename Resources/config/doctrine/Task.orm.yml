@@ -1,6 +1,6 @@
-Brickstorm\FollowBundle\Entity\Follow:
+Brickstorm\CollaborativeTaskManagerBundle\Entity\Task:
   type: entity
-  table: bsrm_follow
+  table: bsrm_task
   fields:
     id:
       id: true
@@ -30,16 +30,16 @@ Brickstorm\FollowBundle\Entity\Follow:
       joinColumns:
         creator_id:
           referencedColumnName: id
-  oneToMany:
-    votes:
-      targetEntity: Vote
-      mappedBy: law
-  manyToMany:
-    users:
-      targetEntity: Application\Sonata\UserBundle\Entity\User
-      mappedBy: parliaments
+  manyToOne:
+    parliament:
+      targetEntity: Brickstorm\ParliamentBundle\Entity\Parliament
+      cascade: {  }
+      joinColumns:
+        parliament_id:
+          referencedColumnName: id
+      orphanRemoval: true
     areas:
-      targetEntity: Area
+      targetEntity: Brickstorm\ParliamentBundle\Entity\Area
       joinTable:
         name: bsrm_parliament_area
         joinColumns:

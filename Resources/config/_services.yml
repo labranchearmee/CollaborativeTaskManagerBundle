@@ -1,0 +1,8 @@
+parameters:
+  collaborative_task_manager.class:      Brickstorm\CollaborativeTaskManagerBundle\Manager\CollaborativeTaskManager
+    collaborative_task_manager.object:     object
+
+services:
+    follow_manager:
+        class:        %collaborative_task_manager.class%
+        arguments:    [@doctrine.orm.default_entity_manager]
