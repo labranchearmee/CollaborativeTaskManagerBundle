@@ -1,0 +1,51 @@
+Brickstorm\FollowBundle\Entity\Follow:
+  type: entity
+  table: bsrm_follow
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+      length: 30
+    description:
+      type: text
+      nullable: true
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+  oneToOne:
+    creator:
+      targetEntity: Application\Sonata\UserBundle\Entity\User
+      cascade: {  }
+      joinColumns:
+        creator_id:
+          referencedColumnName: id
+  oneToMany:
+    votes:
+      targetEntity: Vote
+      mappedBy: law
+  manyToMany:
+    users:
+      targetEntity: Application\Sonata\UserBundle\Entity\User
+      mappedBy: parliaments
+    areas:
+      targetEntity: Area
+      joinTable:
+        name: bsrm_parliament_area
+        joinColumns:
+          parliament_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          area_id:
+            referencedColumnName: id
+  lifecycleCallbacks: {  }
